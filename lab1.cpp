@@ -10,16 +10,19 @@
 int main()
 {
 
+    DWORD size = 256;
+    PVOID wheel_scroll_chars {};
     char buffer[256];
     char username[256];
     TCHAR windows_path_buffer[256];
     TCHAR system_path_buffer[256];
     TCHAR temp_path_buffer[256];
-    DWORD size = 256;
+    TCHAR wallpaper_buffer[256];
 
     OSVERSIONINFO os;
 
     #define DIRECTORY_PATH 32767
+    #define WALLPAPER_PATH 32767
 
 
     // void PrintError(LPCTSTR errDesc);
@@ -65,7 +68,15 @@ int main()
     else
         std::cout << "System metric. No mouse installed" << std::endl;
 
+    // Системные парамеры
+
+    // Получаем и выводим в консоль полный путь к файлу рисунка рабочего стола
+    SystemParametersInfoA(SPI_GETDESKWALLPAPER, WALLPAPER_PATH, wallpaper_buffer, 0);
+    std::cout << "System parameters. Path to wallpaper: " << wallpaper_buffer << std::endl;
     
+    // Получаем и выводим в консоль значение времени ожидания заставки экрана (в секундах)
+    SystemParametersInfoA(SPI_GETWHEELSCROLLCHARS, 0, wheel_scroll_chars, 0);
+    std::cout << "System parameters. Screensaver timeout: " << wheel_scroll_chars << std::endl;
 
     return 0;
 }
