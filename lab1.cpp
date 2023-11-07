@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <TCHAR.h>
+#include <winuser.h>
 
  
 int main()
@@ -49,6 +50,22 @@ int main()
     std::cout << "Temp directory: " << temp_path_buffer << std::endl;
     */
 
+    // Получаем и выводим в консоль версию операционной системы
     GetVersionEx(&os);
     std::cout << "OS Version: " << os.dwMajorVersion << std::endl;
+
+    // Системные метрики
+
+    // Получаем и выводим в консоль количество мониторов
+    std::cout << "System metric. Monitors: " << GetSystemMetrics(SM_CMONITORS) << std::endl;
+
+    // Получаем и выводим в консоль информацию установлена ли мышь
+    if (GetSystemMetrics(SM_MOUSEPRESENT))
+        std::cout << "System metric. Mouse installed" << std::endl;
+    else
+        std::cout << "System metric. No mouse installed" << std::endl;
+
+    
+
+    return 0;
 }
