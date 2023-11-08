@@ -3,15 +3,11 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
-// #include <TCHAR.h>
-// #include <winuser.h>
 
- 
+
 int main()
-{
-
+{   
     DWORD size = 256;
-    PVOID wheel_scroll_chars;
     char buffer[MAX_PATH];
     char username[MAX_PATH];
     TCHAR windows_path_buffer[MAX_PATH];
@@ -27,15 +23,15 @@ int main()
     #define DIRECTORY_PATH 32767
     #define WALLPAPER_PATH 32767
 
-    // void PrintError(LPCTSTR errDesc);
-
     // Получаем и выводим в консоль имя компьютера
-    GetComputerNameA(buffer,&size);
-    std::cout << "Computer name: " << buffer << std::endl;
+    GetComputerNameA(buffer, &size);
+    printf("Computer name: %s\n", buffer);
 
     // Получаем и выводим в консоль имя пользователя
     GetUserNameA(username, &size);
-    std::cout << "User name: " << username << std::endl;
+    printf("User name: %s\n", username);
+
+    printf("---------------------------------------\n");
 
     // Получаем и выводим в консоль путь к папке WINDOWS
     GetWindowsDirectory(windows_path_buffer, DIRECTORY_PATH);
@@ -47,15 +43,15 @@ int main()
 
     // Получаем и выводим в консоль путь к папке TEMP
     GetTempPath(MAX_PATH, temp_path_buffer);
-    // if (temp_path_buffer > DIRECTORY_PATH || (temp_path_buffer == 0))
-    // {
-    //     PrintError(TEXT("GetTempPath failed"));
-    // }
     printf("Temp Directory: %s\n", temp_path_buffer);
+
+    printf("---------------------------------------\n");
 
     // Получаем и выводим в консоль версию операционной системы
     GetVersionEx(&os);
     printf("OS Version: %d\n", os.dwMajorVersion);
+
+    printf("---------------------------------------\n");
 
     // Системные метрики
 
@@ -67,6 +63,8 @@ int main()
         std::cout << "System metric. Mouse installed" << std::endl;
     else
         std::cout << "System metric. No mouse installed" << std::endl;
+
+    printf("---------------------------------------\n");
 
     // Системные парамеры
 
@@ -81,6 +79,8 @@ int main()
     // Получаем и выводим в консоль текущее значение скорость мыши (значения от 1 до 20, по умолчанию - 10)
     SystemParametersInfoA(SPI_GETMOUSESPEED, 0, mouse_buffer, 0);
     std::cout << "System parameters. Mouse buffer: " <<  *mouse_buffer << std::endl;
+
+    printf("---------------------------------------\n");
 
     //  Системные цвета
     
@@ -98,23 +98,25 @@ int main()
         GetBValue(aOldColors[0]));
 
     // Установка нового цвета
-    // aNewColors[0] = RGB(0xFF, 0x7F, 0x50);  // оранженый
+    aNewColors[0] = RGB(0xFF, 0x7F, 0x50);  // рамка выделения оранжевого цвета
 
-    // printf("\nNew highlight color: {0x%x, 0x%x, 0x%x}\n", 
-    //     GetRValue(aNewColors[0]), 
-    //     GetGValue(aNewColors[0]), 
-    //     GetBValue(aNewColors[0]));
+    printf("\nNew highlight color: {0x%x, 0x%x, 0x%x}\n", 
+        GetRValue(aNewColors[0]), 
+        GetGValue(aNewColors[0]), 
+        GetBValue(aNewColors[0]));
 
-    // SetSysColors(1, aElements, aNewColors); 
+    SetSysColors(1, aElements, aNewColors); 
 
-    // printf("\nHighlight color have been changed.\n");
-    // printf("Reverting to previous colors in 30 seconds...\n");
+    printf("\nHighlight color have been changed.\n");
+    printf("Reverting to previous colors in 10 seconds...\n");
 
-    // Sleep(30000);    
+    Sleep(10000);    
 
     // Возврат к первоначальным настройкам цвета
 
-    // SetSysColors(1, aElements, aOldColors); 
+    SetSysColors(1, aElements, aOldColors);
+
+    printf("---------------------------------------\n");
 
     // Функции для работы со временем
     SYSTEMTIME tm, lt;
@@ -124,6 +126,8 @@ int main()
 
     printf("The system time is: %02d:%02d\n", tm.wHour, tm.wMinute);
     printf("The local time is: %02d:%02d\n", lt.wHour, lt.wMinute);
+
+    printf("---------------------------------------\n");
 
     // API
     // Позиция курсора (координаты x, y)
@@ -142,6 +146,7 @@ int main()
   
     // Воспроизводит звуковой сигнал
     MessageBeep(0xFFFFFFFF);
+    printf("Beep! Thanks to attention");
 
     return 0;
 }

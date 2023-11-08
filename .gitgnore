@@ -37,3 +37,7 @@ _.lib
 _.exe
 _.out
 \*.app
+
+# Res files
+
+\*\RES
