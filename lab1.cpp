@@ -100,25 +100,41 @@ int main()
         GetBValue(aOldColors[0]));
 
     // Установка нового цвета
-    aNewColors[0] = RGB(0xFF, 0x7F, 0x50);  // оранженый
+    // aNewColors[0] = RGB(0xFF, 0x7F, 0x50);  // оранженый
 
-    printf("\nNew highlight color: {0x%x, 0x%x, 0x%x}\n", 
-        GetRValue(aNewColors[0]), 
-        GetGValue(aNewColors[0]), 
-        GetBValue(aNewColors[0]));
+    // printf("\nNew highlight color: {0x%x, 0x%x, 0x%x}\n", 
+    //     GetRValue(aNewColors[0]), 
+    //     GetGValue(aNewColors[0]), 
+    //     GetBValue(aNewColors[0]));
 
-    SetSysColors(1, aElements, aNewColors); 
+    // SetSysColors(1, aElements, aNewColors); 
 
-    printf("\nHighlight color have been changed.\n");
-    printf("Reverting to previous colors in 30 seconds...\n");
+    // printf("\nHighlight color have been changed.\n");
+    // printf("Reverting to previous colors in 30 seconds...\n");
 
-    Sleep(30000);    
+    // Sleep(30000);    
 
     // Возврат к первоначальным настройкам цвета
 
-    SetSysColors(1, aElements, aOldColors); 
+    // SetSysColors(1, aElements, aOldColors); 
 
+    // Функции для работы со временем
+    SYSTEMTIME tm, lt;
+
+    GetSystemTime(&tm);
+    GetLocalTime(&lt);  
+
+    printf("The system time is: %02d:%02d\n", tm.wHour, tm.wMinute);
+    printf("The local time is: %02d:%02d\n", lt.wHour, lt.wMinute);
+
+    // API
+    POINT cursor_coordinates;
+    GetCursorPos(&cursor_coordinates);
+    printf("The cursor coodinates is: %02d:%02d\n", cursor_coordinates.x, cursor_coordinates.y);
     
+    // HKL GetKeyboardLayout(
+  
+    // MessageBeep
 
     return 0;
 }
