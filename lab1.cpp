@@ -3,8 +3,8 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
-#include <TCHAR.h>
-#include <winuser.h>
+// #include <TCHAR.h>
+// #include <winuser.h>
 
  
 int main()
@@ -12,14 +12,14 @@ int main()
 
     DWORD size = 256;
     PVOID wheel_scroll_chars;
-    char buffer[256];
-    char username[256];
-    TCHAR windows_path_buffer[256];
-    TCHAR system_path_buffer[256];
-    TCHAR temp_path_buffer[256];
-    TCHAR wallpaper_buffer[256];
-    DWORD context_menu_buffer[256];
-    UINT mouse_buffer[256];
+    char buffer[MAX_PATH];
+    char username[MAX_PATH];
+    TCHAR windows_path_buffer[MAX_PATH];
+    TCHAR system_path_buffer[MAX_PATH];
+    TCHAR temp_path_buffer[MAX_PATH];
+    TCHAR wallpaper_buffer[MAX_PATH];
+    DWORD context_menu_buffer[MAX_PATH];
+    UINT mouse_buffer[MAX_PATH];
     DWORD system_color_highlight;
 
     OSVERSIONINFO os;
@@ -39,25 +39,23 @@ int main()
 
     // Получаем и выводим в консоль путь к папке WINDOWS
     GetWindowsDirectory(windows_path_buffer, DIRECTORY_PATH);
-    std::cout << "Windows Directory: " << windows_path_buffer << std::endl;
+    printf("Windows Directory: %s\n", windows_path_buffer);
 
     // Получаем и выводим в консоль путь к папке SYSTEM 
-    GetSystemDirectory( system_path_buffer, DIRECTORY_PATH);
-    std::cout << "System Directory: " << system_path_buffer << std::endl;
+    GetSystemDirectory(system_path_buffer, DIRECTORY_PATH);
+    printf("System Directory:: %s\n", system_path_buffer);
 
     // Получаем и выводим в консоль путь к папке TEMP
-    /*
-    GetTempPath( DIRECTORY_PATH, temp_path_buffer);
-    if (temp_path_buffer > DIRECTORY_PATH || (temp_path_buffer == 0))
-    {
-        PrintError(TEXT("GetTempPath failed"));
-    }
-    std::cout << "Temp directory: " << temp_path_buffer << std::endl;
-    */
+    GetTempPath(MAX_PATH, temp_path_buffer);
+    // if (temp_path_buffer > DIRECTORY_PATH || (temp_path_buffer == 0))
+    // {
+    //     PrintError(TEXT("GetTempPath failed"));
+    // }
+    printf("Temp Directory: %s\n", temp_path_buffer);
 
     // Получаем и выводим в консоль версию операционной системы
     GetVersionEx(&os);
-    std::cout << "OS Version: " << os.dwMajorVersion << std::endl;
+    printf("OS Version: %d\n", os.dwMajorVersion);
 
     // Системные метрики
 
@@ -128,13 +126,22 @@ int main()
     printf("The local time is: %02d:%02d\n", lt.wHour, lt.wMinute);
 
     // API
+    // Позиция курсора (координаты x, y)
     POINT cursor_coordinates;
     GetCursorPos(&cursor_coordinates);
     printf("The cursor coodinates is: %02d:%02d\n", cursor_coordinates.x, cursor_coordinates.y);
     
-    // HKL GetKeyboardLayout(
+    // Выводит в консоль состояние системы питания
+    SYSTEM_POWER_STATUS power_status;
+    GetSystemPowerStatus(&power_status);
+    printf("Battery life: %d percent\n", power_status.BatteryLifePercent);
+
+    // Меняет местами назначение клавиш компьютерной мыши, по умолчанию - false
+    BOOL swap_mouse {false};
+    SwapMouseButton(swap_mouse);
   
-    // MessageBeep
+    // Воспроизводит звуковой сигнал
+    MessageBeep(0xFFFFFFFF);
 
     return 0;
 }
