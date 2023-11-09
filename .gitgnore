@@ -38,6 +38,6 @@ _.exe
 _.out
 \*.app
 
-# Res files
+# Temp files
 
-\*\RES
+temp/
