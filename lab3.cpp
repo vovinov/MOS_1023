@@ -10,6 +10,13 @@
 выполнения).
 */
 
+#include <iostream>
+#include <string>
+#include <filesystem>
+#include <windows.h>
+#include <tlhelp32.h>
+
+
 int main() {
 
   
