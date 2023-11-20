@@ -14,11 +14,12 @@
 #include <string>
 #include <filesystem>
 #include <windows.h>
-#include <tlhelp32.h>
 
 
 int main() {
-
+  // Пример использования синхронизации с помощью метода критической секции
+  CRITICAL_SECTION critical_section;
+  InitializeCriticalSection(&critical_section);
   
   return 0;
 }
