@@ -16,6 +16,7 @@
 #include <windows.h>
 #include <thread>
 
+
 // Пример использования синхронизации с помощью метода критической секции
 
 CRITICAL_SECTION critical_section;
@@ -26,23 +27,29 @@ void print_thread(int k) {
   for (int i = 0; i < 10; i++) {
   std::cout << k;
 
-  Sleep(50);
-
+  Sleep(150);
+  };
+  std::cout << std::endl;
+  std::cout << "******" << std::endl;
   LeaveCriticalSection(&critical_section);
 };
 
 int main() {
   
   InitializeCriticalSection(&critical_section);
-  
-  HANDLE hTread;
-  DWORD IDThread;
 
-  thread thread1(print_thread ,1);
+  std::thread thread1(print_thread, 1);
+  std::thread thread2(print_thread, 2);
+  std::thread thread3(print_thread, 3);
+
+  // Завершение потока
+  thread1.join();
+  thread2.join();
+  thread3.join();
 
   DeleteCriticalSection(&critical_section);
 
-  pause(0)
+  system("pause");
 
   return 0;
-}
+};

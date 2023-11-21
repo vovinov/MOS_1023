@@ -63,7 +63,12 @@
     "list": "cpp",
     "optional": "cpp",
     "sstream": "cpp",
-    "vector": "cpp"
+    "vector": "cpp",
+    "array": "cpp",
+    "deque": "cpp",
+    "queue": "cpp",
+    "ranges": "cpp",
+    "span": "cpp"
   },
   "terminal.integrated.fontFamily": "Lucida Console"
 }
