@@ -56,7 +56,8 @@ int main()
     // Системные метрики
 
     // Получаем и выводим в консоль количество мониторов
-    std::cout << "System metric. Monitors: " << GetSystemMetrics(SM_CMONITORS) << std::endl;
+    std::cout << "System metric. Monitors: " << GetSystemMetrics(SM_CMONITORS) 
+    << std::endl;
 
     // Получаем и выводим в консоль информацию установлена ли мышь
     if (GetSystemMetrics(SM_MOUSEPRESENT))
@@ -69,16 +70,25 @@ int main()
     // Системные парамеры
 
     // Получаем и выводим в консоль полный путь к файлу рисунка рабочего стола
-    SystemParametersInfoA(SPI_GETDESKWALLPAPER, WALLPAPER_PATH, wallpaper_buffer, 0);
-    std::cout << "System parameters. Path to wallpaper: " << wallpaper_buffer << std::endl;
+    SystemParametersInfoA(
+        SPI_GETDESKWALLPAPER, 
+        WALLPAPER_PATH, 
+        wallpaper_buffer, 
+        0);
+    std::cout << "System parameters. Path to wallpaper: " 
+    << wallpaper_buffer << std::endl;
     
-    // Получаем и выводим в консоль значение времени ожидания контекстного меню (в милисекундах)
+    // Получаем и выводим в консоль значение времени 
+    // ожидания контекстного меню (в милисекундах)
     SystemParametersInfoA(SPI_GETMENUSHOWDELAY, 0, context_menu_buffer, 0);
-    std::cout << "System parameters. Mouseover context menu activate after " <<  *context_menu_buffer << " ms" << std::endl;
+    std::cout << "System parameters. Mouseover context menu activate after " 
+    <<  *context_menu_buffer << " ms" << std::endl;
 
-    // Получаем и выводим в консоль текущее значение скорость мыши (значения от 1 до 20, по умолчанию - 10)
+    // Получаем и выводим в консоль текущее значение 
+    // скорости мыши (значения от 1 до 20, по умолчанию - 10)
     SystemParametersInfoA(SPI_GETMOUSESPEED, 0, mouse_buffer, 0);
-    std::cout << "System parameters. Mouse buffer: " <<  *mouse_buffer << std::endl;
+    std::cout << "System parameters. Mouse buffer: " 
+    <<  *mouse_buffer << std::endl;
 
     printf("---------------------------------------\n");
 
@@ -143,6 +153,7 @@ int main()
     // Меняет местами назначение клавиш компьютерной мыши, по умолчанию - false
     BOOL swap_mouse {false};
     SwapMouseButton(swap_mouse);
+    printf("Mouse buttons changed\n");
   
     // Воспроизводит звуковой сигнал
     MessageBeep(0xFFFFFFFF);
