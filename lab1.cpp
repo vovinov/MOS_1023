@@ -143,7 +143,9 @@ int main()
     // Позиция курсора (координаты x, y)
     POINT cursor_coordinates;
     GetCursorPos(&cursor_coordinates);
-    printf("The cursor coodinates is: %02d:%02d\n", cursor_coordinates.x, cursor_coordinates.y);
+    printf("The cursor coodinates is: %02d:%02d\n", 
+            cursor_coordinates.x, 
+            cursor_coordinates.y);
     
     // Выводит в консоль состояние системы питания
     SYSTEM_POWER_STATUS power_status;
