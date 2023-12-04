@@ -1,37 +1,26 @@
-/*
-2. Исследование на конкретном примере следующих методов синхронизации потоков:
-1) критическая секция
-2) мьтекс
-3) событие
-4) * семафор, ждущий таймер или барьер
-Задачи для демонстрации применения средств синхронизации придумайте
-самостоятельно.
-3. Примеры разработанных приложений (описание задачи, код приложений, результаты
-выполнения).
-*/
-
 #include <iostream>
-#include <string>
-#include <filesystem>
 #include <windows.h>
 #include <thread>
-
 
 // Пример использования синхронизации с помощью метода критической секции
 
 CRITICAL_SECTION critical_section;
 
+// Функция последовательно выводит число 
 void print_thread(int k) {
+  
   EnterCriticalSection(&critical_section);
-
+  std::cout << "******" << std::endl;
+  std::cout << "Enter critical section" << std::endl;
   for (int i = 0; i < 10; i++) {
   std::cout << k;
 
-  Sleep(150);
+  Sleep(300);
   };
   std::cout << std::endl;
-  std::cout << "******" << std::endl;
+  std::cout << "Leave critical section" << std::endl;
   LeaveCriticalSection(&critical_section);
+  
 };
 
 int main() {

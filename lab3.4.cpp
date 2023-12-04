@@ -22,7 +22,7 @@ int main() {
   // Создаём потоки
   for(i = 0; i < THREADCOUNT; i++) {
       aThread[i] = CreateThread(NULL, 0, ThreadProc, NULL, 0, &ThreadID); 
-  }
+  };
   WaitForMultipleObjects(THREADCOUNT, aThread, TRUE, INFINITE);
 
   // Закрываем потоки

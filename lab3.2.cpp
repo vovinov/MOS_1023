@@ -1,4 +1,3 @@
-
 #include <windows.h>
 #include <iostream>
 
@@ -11,7 +10,7 @@ DWORD dwCounter = 0;
 DWORD WINAPI ThreadProc(CONST LPVOID lpParam) {
   CONST HANDLE hMutex = (CONST HANDLE)lpParam;
   DWORD i;
-  for(i = 0; i < ITERATIONS_NUMBER; i++) {
+  for (i = 0; i < ITERATIONS_NUMBER; i++) {
     WaitForSingleObject(hMutex, INFINITE);    
     dwCounter++;
     std::cout << dwCounter << std::endl;
@@ -21,7 +20,6 @@ DWORD WINAPI ThreadProc(CONST LPVOID lpParam) {
   }
   ExitThread(0);
 }
-
 
 int main() {
   TCHAR szMessage[256];
@@ -37,7 +35,6 @@ int main() {
 
   WaitForMultipleObjects(THREADS_NUMBER, hThreads, TRUE, INFINITE);
   printf("Counter = %d\r\n", dwCounter);
-  
 
   for(i = 0; i < THREADS_NUMBER; i++) {
     CloseHandle(hThreads[i]);
