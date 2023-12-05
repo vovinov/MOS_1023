@@ -11,6 +11,30 @@ WORD dwCounter;
 
 DWORD WINAPI ThreadProc( LPVOID );
 
+DWORD WINAPI ThreadProc(LPVOID lpParam) {
+
+  DWORD dwWaitResult; 
+  BOOL bContinue = TRUE;
+
+  while(bContinue) {
+    
+    dwWaitResult = WaitForSingleObject(ghSemaphore, INFINITE);
+    printf("Thread %d: wait succeeded\n", GetCurrentThreadId());
+    if (dwWaitResult == WAIT_OBJECT_0) {                
+      
+      dwCounter++;
+      std::cout << dwCounter << std::endl;
+      bContinue = FALSE;
+
+      Sleep(2000);
+
+      ReleaseSemaphore(ghSemaphore, 1, NULL);
+    };
+  };
+
+  return 1;
+};
+
 int main() {
   HANDLE aThread[THREADCOUNT];
   DWORD ThreadID;
@@ -23,47 +47,18 @@ int main() {
   for(i = 0; i < THREADCOUNT; i++) {
       aThread[i] = CreateThread(NULL, 0, ThreadProc, NULL, 0, &ThreadID); 
   };
+
   WaitForMultipleObjects(THREADCOUNT, aThread, TRUE, INFINITE);
 
   // Закрываем потоки
-  for(i = 0; i < THREADCOUNT; i++)
-      CloseHandle(aThread[i]);
+  for(i = 0; i < THREADCOUNT; i++) {
+    CloseHandle(aThread[i]);
+  };
+
+  std::cout << "Close threads" << std::endl;
 
   // Закрываем семафор
   CloseHandle(ghSemaphore);
 
   return 0;
-};
-
-DWORD WINAPI ThreadProc(LPVOID lpParam) {
-
-  DWORD dwWaitResult; 
-  BOOL bContinue = TRUE;
-
-  while(bContinue) {
-    // 0L
-    dwWaitResult = WaitForSingleObject(ghSemaphore, INFINITE);
-
-    switch (dwWaitResult) {      
-      case WAIT_OBJECT_0:             
-        printf("Thread %d: wait succeeded\n", GetCurrentThreadId());
-        dwCounter++;
-        std::cout << dwCounter << std::endl;
-        bContinue = FALSE;
-
-        Sleep(5);
-
-        ReleaseSemaphore(ghSemaphore, 1, NULL);
-        // if (!ReleaseSemaphore(ghSemaphore, 1, NULL)) {
-        //   printf("ReleaseSemaphore error: %d\n", GetLastError());
-        // };
-        // break;
-
-      case WAIT_TIMEOUT: 
-        printf("Thread %d: wait timed out\n", GetCurrentThreadId());
-        break; 
-    };
-  };
-
-  return TRUE;
 };
