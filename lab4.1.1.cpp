@@ -85,16 +85,16 @@ LPCTSTR SlotName = TEXT("\\\\.\\mailslot\\sample_mailslot");
 
 BOOL ReadSlot() {
 
-DWORD cbMessage, cMessage, cbRead;
-BOOL fResult;
-LPTSTR lpszBuffer;
-TCHAR achID[80];
-DWORD cAllMessages;
-HANDLE hEvent;
-OVERLAPPED ov;
+  DWORD cbMessage, cMessage, cbRead;
+  BOOL fResult;
+  LPTSTR lpszBuffer;
+  TCHAR achID[80];
+  DWORD cAllMessages;
+  HANDLE hEvent;
+  OVERLAPPED ov;
 
-cbMessage = cMessage = cbRead = 0;
-hEvent = CreateEvent(NULL, FALSE, FALSE, TEXT("ExampleSlot"));
+  cbMessage = cMessage = cbRead = 0;
+  hEvent = CreateEvent(NULL, FALSE, FALSE, TEXT("ExampleSlot"));
 
 if (NULL == hEvent)
   return FALSE;
@@ -124,7 +124,7 @@ if (cbMessage == MAILSLOT_NO_MESSAGE) {
 
 cAllMessages = cMessage;
 
-while (cMessage != 0) {// retrieve all messages
+while (cMessage != 0) {
 
 // Create a message-number string.
 
