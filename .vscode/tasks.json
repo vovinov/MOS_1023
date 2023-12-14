@@ -8,9 +8,9 @@
       "args": [
         "-g",
         "-std=c++20",
-        "${workspaceFolder}\\lab3.4.cpp",
+        "${workspaceFolder}\\lab4.1.1_server.cpp",
         "-o",
-        "${workspaceFolder}\\res\\lab3.4.exe"
+        "${workspaceFolder}\\lab4.1.1_server.exe"
       ],
       "options": {
         "cwd": "${fileDirname}"
