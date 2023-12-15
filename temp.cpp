@@ -1,3 +1,7 @@
+#include <iostream>
+
+namespace std;
+
 // Функция для нахождения определителя матрицы
 int determinant(int matrix[2][2]) {
     int det = matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
