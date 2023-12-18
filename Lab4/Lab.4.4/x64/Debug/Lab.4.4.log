@@ -1,0 +1,5 @@
+﻿  Lab4.4.cpp
+C:\Users\slava\Desktop\Project\!C++\MOS_LAB\Lab4\Lab.4.4\Lab4.4.cpp(50,51): warning C4267: аргумент: преобразование из "size_t" в "DWORD"; возможна потеря данных
+C:\Users\slava\Desktop\Project\!C++\MOS_LAB\Lab4\Lab.4.4\Lab4.4.cpp(62,17): warning C4474: "fprintf" : для строки формата передано слишком много аргументов
+C:\Users\slava\Desktop\Project\!C++\MOS_LAB\Lab4\Lab.4.4\Lab4.4.cpp(62,17): message : заполнители и их параметры ожидают переменное число аргументов в количестве 0, но было предоставлено 1
+  Lab.4.4.vcxproj -> C:\Users\slava\Desktop\Project\!C++\MOS_LAB\Lab4\Lab4.3\x64\Debug\Lab4.4.exe
