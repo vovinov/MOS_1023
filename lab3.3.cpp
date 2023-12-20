@@ -9,21 +9,22 @@ HANDLE ghThreads[THREADCOUNT];
 DWORD WINAPI ThreadProc(LPVOID);
 
 // Функция  записи в буфер
-void WriteToBuffer() {    
+void WriteToBuffer()
+{    
     printf("Main thread writing to the shared buffer...\n");
-
     SetEvent(ghWriteEvent);
 };
 
-DWORD WINAPI ThreadProc(LPVOID lpParam) {
-
+DWORD WINAPI ThreadProc(LPVOID lpParam)
+{
     DWORD dwWaitResult;
     
     printf("Thread %d waiting for write event...\n", GetCurrentThreadId());
     
     dwWaitResult = WaitForSingleObject(ghWriteEvent, INFINITE);    
 
-    if (dwWaitResult == WAIT_OBJECT_0) {
+    if (dwWaitResult == WAIT_OBJECT_0)
+    {
         printf("Thread %d reading from buffer\n", GetCurrentThreadId());
     };
 
@@ -31,8 +32,8 @@ DWORD WINAPI ThreadProc(LPVOID lpParam) {
     return 1;
 };
 
-
-int main() {
+int main()
+{
 
     int i; 
     DWORD dwThreadID; 
@@ -42,7 +43,8 @@ int main() {
     ghWriteEvent = CreateEvent(NULL, TRUE, FALSE, TEXT("WriteEvent"));
 
     // Создаём потоки
-    for(i = 0; i < THREADCOUNT; i++) {
+    for(i = 0; i < THREADCOUNT; i++)
+    {
         ghThreads[i] = CreateThread(NULL, 0, ThreadProc, NULL, 0, &dwThreadID); 
     };
 
@@ -55,7 +57,8 @@ int main() {
         TRUE,
         INFINITE);
 
-    if (dwWaitResult == WAIT_OBJECT_0) {
+    if (dwWaitResult == WAIT_OBJECT_0)
+    {
         printf("All threads ended, cleaning up for application exit...\n");
     };
             

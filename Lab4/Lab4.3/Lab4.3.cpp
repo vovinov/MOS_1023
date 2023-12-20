@@ -6,9 +6,6 @@
 #include <cstdlib>
 #include <ctime>
 #include <strsafe.h>
-#include <windows.h>
-#include <stdio.h>
-#include <conio.h>
 
 using namespace std;
 
@@ -47,63 +44,6 @@ int main() {
 
 	// Ожидаем соединения со стороны клиента
 	fConnected = ConnectNamedPipe(hNamedPipe, NULL);
-
-	// При возникновении ошибки выводим ее код
-	if (!fConnected)	{
-
-		switch (GetLastError()) {
-
-		case ERROR_NO_DATA:
-
-			fprintf(stdout, "ConnectNamedPipe: ERROR_NO_DATA");
-			_getch();
-			CloseHandle(hNamedPipe);
-			return 0;
-			break;
-
-		case ERROR_PIPE_CONNECTED:
-			fprintf(stdout,
-				"ConnectNamedPipe: ERROR_PIPE_CONNECTED");
-			_getch();
-			CloseHandle(hNamedPipe);
-			return 0;
-
-			break;
-
-		case ERROR_PIPE_LISTENING:
-			fprintf(stdout,
-				"ConnectNamedPipe: ERROR_PIPE_LISTENING");
-			_getch();
-			CloseHandle(hNamedPipe);
-			return 0;
-
-			break;
-
-		case ERROR_CALL_NOT_IMPLEMENTED:
-			fprintf(stdout,
-				"ConnectNamedPipe: ERROR_CALL_NOT_IMPLEMENTED");
-			_getch();
-			CloseHandle(hNamedPipe);
-			return 0;
-
-			break;
-
-		default:
-
-			fprintf(stdout, "ConnectNamedPipe: Error %ld\n",
-				GetLastError());
-			_getch();
-			CloseHandle(hNamedPipe);
-			return 0;
-
-			break;
-		}
-
-		CloseHandle(hNamedPipe);
-
-		_getch();
-		return 0;
-	}
 
 	// Выводим сообщение об успешном создании канала
 	fprintf(stdout, "\nСоединение успешно. Ожидаем команды...\n");

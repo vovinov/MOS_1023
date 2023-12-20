@@ -42,9 +42,9 @@ int main() {
 		mutex = CreateMutexA(NULL, FALSE, "first");
 	}
 
-	cout << "Файл : " << hFile << endl;
+	cout << "File: " << hFile << endl;
 	cout << "mapping: " << mapping << endl;
-	cout << "Мьютекс: " << mutex << endl;
+	cout << "Mutex: " << mutex << endl;
 
 	DWORD dwBytesToWrite = 13;
 
@@ -52,13 +52,13 @@ int main() {
 
 		WaitForSingleObject(mutex, INFINITE);
 
-		cout << "Запись в файл процесса номер 1" << endl;
+		cout << "Write from process 1" << endl;
 
 		for (int i = 0; i < 4; i++) {
 
 			data->mas[data->sch] = '9';
 
-			cout << "Элемент номер " << data->sch << " равен " << data->mas[data->sch] << endl;
+			cout << "Write to file in order " << data->sch << " number " << data->mas[data->sch] << endl;
 
 			WriteFile(
 
@@ -71,11 +71,9 @@ int main() {
 			Sleep(500);
 
 			data->sch++;
-
 		}
 
 		ReleaseMutex(mutex);
-
 		});
 
 	user_input_thread.join();
@@ -83,5 +81,4 @@ int main() {
 	system("pause");
 
 	CloseHandle(hFile);
-
 }

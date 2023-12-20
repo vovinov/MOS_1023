@@ -11,7 +11,8 @@ WORD dwCounter;
 
 DWORD WINAPI ThreadProc( LPVOID );
 
-DWORD WINAPI ThreadProc(LPVOID lpParam) {
+DWORD WINAPI ThreadProc(LPVOID lpParam)
+{
 
   DWORD dwWaitResult; 
   BOOL bContinue = TRUE;
@@ -35,7 +36,8 @@ DWORD WINAPI ThreadProc(LPVOID lpParam) {
   return 1;
 };
 
-int main() {
+int main()
+{
   HANDLE aThread[THREADCOUNT];
   DWORD ThreadID;
   int i;
